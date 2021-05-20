@@ -81,7 +81,7 @@ public:
         consensus.nMajorityWindow = 1000;
         consensus.BIP34Height = 11324612;
         consensus.BIP34Hash = uint256S("0x4bd3308d384e80094e4659f9a3245e6f444688edbec0ad88b9a5dfd4be87454e");
-        // consensus.BIP65Height = 11324613; // Not enabled in Fastcoin yet
+        consensus.BIP65Height = 11324613; // 
         consensus.BIP66Height = 11324613; // 80d1364201e5df97e696c03bdd24dc885e8617b9de51e453c10a4f629b1e797a - this is the last block that could be v2, 1900 blocks past the last v2 block
         consensus.powLimit = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20;
         consensus.fDigishieldDifficultyCalculation = false;
@@ -106,10 +106,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // Disabled
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000e22c0b614efbcd");  //block 11400000
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000e22c0b614efbcd");  // Block 11400000
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0xd1ad0a9c810b57033dc4df476ef83b26188753da033aaca46d9b28081b9203e2"); // block 11400000
+        consensus.defaultAssumeValid = uint256S("0xd1ad0a9c810b57033dc4df476ef83b26188753da033aaca46d9b28081b9203e2");  // Block 11400000
 
         // AuxPoW parameters
         consensus.nAuxpowChainId = 0x00F1; // 241
@@ -216,7 +216,7 @@ public:
 
         chainTxData = ChainTxData{
             // Data as of block d1ad0a9c810b57033dc4df476ef83b26188753da033aaca46d9b28081b9203e2 (height 11400000).
-            // Tx estimate based on average of year 2018 (~27k transactions per day)
+            // Tx estimate based on average of year 2013 (~27k transactions per day)
             1617518434, // * UNIX timestamp of last checkpoint block
             13601906,   // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
@@ -252,7 +252,7 @@ public:
         // BIP34 is never enforced in Fastcoin v2 blocks, so we enforce from v3
         consensus.BIP34Height = 708658;
         consensus.BIP34Hash = uint256S("0x21b8b97dcdb94caa67c7f8f6dbf22e61e0cfe0e46e1fff3528b22864659e9b38");
-        // consensus.BIP65Height = 581885; // 00000000007f6655f22f98e72ed80d8b06dc761d5da09df0fa1dc4be4f861eb6
+        consensus.BIP65Height = 581885; // 00000000007f6655f22f98e72ed80d8b06dc761d5da09df0fa1dc4be4f861eb6
         consensus.BIP66Height = 708658; // 21b8b97dcdb94caa67c7f8f6dbf22e61e0cfe0e46e1fff3528b22864659e9b38 - this is the last block that could be v2, 1900 blocks past the last v2 block
         consensus.powLimit = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20;
         consensus.nPowTargetTimespan = 4 * 60 * 60; // pre-digishield: 4 hours
@@ -388,7 +388,7 @@ public:
         consensus.nMajorityWindow = 1000;
         consensus.BIP34Height = 100000000; // BIP34 has not activated on regtest (far in the future so block v1 are not rejected in tests)
         consensus.BIP34Hash = uint256();
-        // consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
+        consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
         consensus.powLimit = uint256S("0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 1;
         consensus.nPowTargetTimespan = 4 * 60 * 60; // pre-digishield: 4 hours
