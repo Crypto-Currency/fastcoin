@@ -55,7 +55,7 @@ not straightforward.
 RPC 9527
 P2P 9526
 
-**Ubuntu compiling**
+**Ubuntu compiling** with boost_1.65.1
 ```
 cd fastcoin
 BITCOIN_ROOT=$(pwd)
