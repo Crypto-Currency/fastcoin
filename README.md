@@ -55,6 +55,25 @@ not straightforward.
 RPC 9527
 P2P 9526
 
+**Ubuntu compiling**
+```
+cd fastcoin
+BITCOIN_ROOT=$(pwd)
+BDB_PREFIX="${BITCOIN_ROOT}/db5"
+mkdir -p $BDB_PREFIX
+wget 'http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz'
+echo '08238e59736d1aacdd47cfb8e68684c695516c37f4fbe1b8267dde58dc3a576c db-5.1.29.NC.tar.gz' | sha256sum -c
+tar -xzvf db-5.1.29.NC.tar.gz
+cd db-5.1.29.NC/build_unix/
+../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
+make install
+cd $BITCOIN_ROOT
+./autogen.sh
+./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" --disable-tests --disable-bench --enable-upnp-default
+make
+```
+
+
 
 **compiling for debugging**
 
