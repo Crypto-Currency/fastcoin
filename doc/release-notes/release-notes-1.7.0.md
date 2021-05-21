@@ -53,5 +53,5 @@ not used for real transactions, and instead is intended for testing of experimen
 clients. Wallets and addresses are incompatible with the normal Fastcoin
 network, in order to isolate the two.
 
-As "TestDoge" is essentially valueless, it can be acquired easily for testing,
+As "TestFST" is essentially valueless, it can be acquired easily for testing,
  by mining
