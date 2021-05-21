@@ -1,4 +1,4 @@
-// Copyright (c) 2015 The Fastcoin Core developers
+// Copyright (c) 2013-2021 The Fastcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -31,7 +31,7 @@ bool AllowDigishieldMinDifficultyForBlock(const CBlockIndex* pindexLast, const C
 
 unsigned int CalculateFastcoinNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
-    
+
     const int64_t retargetTimespan = params.nPowTargetTimespan;
     const int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
     int64_t nModulatedTimespan = nActualTimespan;
@@ -117,12 +117,12 @@ CAmount GetFastcoinBlockSubsidy(int nHeight, const Consensus::Params& consensusP
       {
          return 0;
       }
-    
-    CAmount nSubsidy = 32 * COIN; 
+
+    CAmount nSubsidy = 32 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
     return nSubsidy;
-    
+
      }else if(nHeight > consensusParams.SubnHeight && nHeight <= (consensusParams.SubnHeight + consensusParams.SubBlks)){
      CAmount nSubsidy = consensusParams.SubV * COIN;
     return nSubsidy;
@@ -132,8 +132,8 @@ CAmount GetFastcoinBlockSubsidy(int nHeight, const Consensus::Params& consensusP
       {
          return 0;
       }
-    
-    CAmount nSubsidy = 32 * COIN; 
+
+    CAmount nSubsidy = 32 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
     return nSubsidy;
