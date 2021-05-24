@@ -69,7 +69,7 @@ Then build using:
 
     git clone https://github.com/fastcoin-project/fastcoin.git
     cd fastcoin
-    git checkout 1.14.3.1-release
+    git checkout master
     cd depends
     make HOST=x86_64-w64-mingw32
     cd ..
@@ -81,13 +81,13 @@ Then build using:
 
 To build executables for Windows 32-bit, install the following dependencies:
 
-    sudo apt-get install g++-mingw-w64-i686 mingw-w64-i686-dev 
+    sudo apt-get install g++-mingw-w64-i686 mingw-w64-i686-dev
 
 Then build using:
 
     git clone https://github.com/fastcoin-project/fastcoin.git
     cd fastcoin
-    git checkout 1.14.3.1-release
+    git checkout master
     cd depends
     make HOST=i686-w64-mingw32
     cd ..
