@@ -3,7 +3,11 @@
 
 
 ## What is Fastcoin? 
-Fastcoin is a cryptocurrency like Bitcoin, although it does not use SHA256 as its proof of work (POW). Taking development cues from Tenebrix and Litecoin, Fastcoin currently employs a simplified variant of scrypt.
+
+Fastcoin (FST) has a long history after being created in May 2013 in order to provide faster and less expensive payments than Bitcoin.  As a community coin, the project received significant support in 2021 and was rebased on Dogecoins codebase, making it AUX-POW with other security features.
+60 second Block times, DigiShield, tremendous chain work and very low fees are what Fastcoin offers.  This and maximum Cheetah presence ;)
+Ironically, it is similar to another popular Internet meme coin that began 7 months after FST. 
+The open-source digital currency was began in Toronto Canada and was forked from Litecoin in May 2013, then rebased off Dogecoin in 2021.  Fastcoin's creators envisaged it as a faster, lesser expensive and more transactional cryptocurrency that would have greater appeal beyond the core Bitcoin audience, did we mention it has maximum Cheetah?
 
 http://fastcoin-project.com/
 
