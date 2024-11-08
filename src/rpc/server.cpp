@@ -58,12 +58,20 @@ void RPCServer::OnStopped(boost::function<void ()> slot)
 
 void RPCServer::OnPreCommand(boost::function<void (const CRPCCommand&)> slot)
 {
+  #if BOOST_VERSION >= 106000
     g_rpcSignals.PreCommand.connect(boost::bind(slot, boost::placeholders::_1));
+  #else
+    g_rpcSignals.PreCommand.connect(boost::bind(slot, _1));
+  #endif
 }
 
 void RPCServer::OnPostCommand(boost::function<void (const CRPCCommand&)> slot)
 {
+  #if BOOST_VERSION >= 106000
     g_rpcSignals.PostCommand.connect(boost::bind(slot, boost::placeholders::_1));
+  #else
+    g_rpcSignals.PostCommand.connect(boost::bind(slot, _1));
+  #endif
 }
 
 void RPCTypeCheck(const UniValue& params,
@@ -511,14 +519,17 @@ UniValue CRPCTable::execute(const JSONRPCRequest &request) const
 
 std::vector<std::string> CRPCTable::listCommands() const
 {
-    std::vector<std::string> commandList;
-    typedef std::map<std::string, const CRPCCommand*> commandMap;
+  std::vector<std::string> commandList;
+  typedef std::map<std::string, const CRPCCommand*> commandMap;
 
-    std::transform( mapCommands.begin(), mapCommands.end(),
-                   std::back_inserter(commandList),
-                    boost::bind(&commandMap::value_type::first,
-                               boost::placeholders::_1) );
-    return commandList;
+  #if BOOST_VERSION >= 106000
+    std::transform( mapCommands.begin(), mapCommands.end(), std::back_inserter(commandList),
+                    boost::bind(&commandMap::value_type::first, boost::placeholders::_1) );
+  #else
+    std::transform( mapCommands.begin(), mapCommands.end(), std::back_inserter(commandList),
+                    boost::bind(&commandMap::value_type::first, _1) );
+  #endif
+  return commandList;
 }
 
 std::string HelpExampleCli(const std::string& methodname, const std::string& args)

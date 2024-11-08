@@ -179,11 +179,19 @@ private:
     CTxMemPool &pool;
 
 public:
-    MemPoolConflictRemovalTracker(CTxMemPool &_pool) : pool(_pool) {
-        pool.NotifyEntryRemoved.connect(boost::bind(&MemPoolConflictRemovalTracker::NotifyEntryRemoved,
-                                                    this, boost::placeholders::_1,
-                                                    boost::placeholders::_2));
-    }
+#if BOOST_VERSION >= 106000
+  MemPoolConflictRemovalTracker(CTxMemPool &_pool) : pool(_pool)
+  {
+    pool.NotifyEntryRemoved.connect(boost::bind(&MemPoolConflictRemovalTracker::NotifyEntryRemoved,
+                                    this, boost::placeholders::_1, boost::placeholders::_2));
+  }
+#else
+  MemPoolConflictRemovalTracker(CTxMemPool &_pool) : pool(_pool)
+  {
+    pool.NotifyEntryRemoved.connect(boost::bind(&MemPoolConflictRemovalTracker::NotifyEntryRemoved,
+                                    this, _1, _2));
+  }
+#endif
 
     void NotifyEntryRemoved(CTransactionRef txRemoved, MemPoolRemovalReason reason) {
         if (reason == MemPoolRemovalReason::CONFLICT) {
@@ -191,15 +199,21 @@ public:
         }
     }
 
-    ~MemPoolConflictRemovalTracker() {
-        pool.NotifyEntryRemoved.disconnect(boost::bind(&MemPoolConflictRemovalTracker::NotifyEntryRemoved,
-                                                       this, boost::placeholders::_1,
-                                                       boost::placeholders::_2));
-        for (const auto& tx : conflictedTxs) {
-            GetMainSignals().SyncTransaction(*tx, NULL, CMainSignals::SYNC_TRANSACTION_NOT_IN_BLOCK);
-        }
-        conflictedTxs.clear();
+  ~MemPoolConflictRemovalTracker()
+  {
+#if BOOST_VERSION >= 106000
+    pool.NotifyEntryRemoved.disconnect(boost::bind(&MemPoolConflictRemovalTracker::NotifyEntryRemoved,
+                                       this, boost::placeholders::_1, boost::placeholders::_2));
+#else
+    pool.NotifyEntryRemoved.disconnect(boost::bind(&MemPoolConflictRemovalTracker::NotifyEntryRemoved,
+                                       this, _1, _2));
+#endif
+    for (const auto& tx : conflictedTxs)
+    {
+      GetMainSignals().SyncTransaction(*tx, NULL, CMainSignals::SYNC_TRANSACTION_NOT_IN_BLOCK);
     }
+    conflictedTxs.clear();
+  }
 };
 
 CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& locator)
